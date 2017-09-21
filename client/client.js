@@ -1,22 +1,26 @@
-import React from 'react'
-import { render } from 'react-dom'
-import App from '../components/App'
-import configureStore from '../redux/store'
-import { Provider } from 'react-redux'
+import {createStore} from 'redux';
 
-let initialState = {
-  todos: [{
-    id: 0,
-    completed: false,
-    text: 'Initial todo for demo purposes'
-  }]
+
+const reducer = function (state, action) {
+  if(action.type==="INC") {
+    return state+action.payload;
+  }
+  if(action.type==="DEC") {
+    return state-action.payload;
+  }
+  
+    return state;
 }
 
-let store = configureStore(initialState)
+const store = createStore(reducer, 0);
 
-render(
-    <Provider store={store}>
-    <App />
-    </Provider>
-    ,document.getElementById('app')
-)
+store.subscribe(()=> {
+  console.log ("store changed", store.getState());
+});
+
+
+store.dispatch({type:"INC", payload:1});
+store.dispatch({type:"INC", payload:1});
+store.dispatch({type:"INC", payload:11});
+store.dispatch({type:"INC", payload:19});
+store.dispatch({type:"DEC", payload:10});
