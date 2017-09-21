@@ -13,6 +13,7 @@ const reducer = (state=0, action) => {
     default:
     return state;
   }
+  
 }
 
 const logger = (store) => (next) => (action) => {
