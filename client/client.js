@@ -3,11 +3,11 @@ import {combineReducers, createStore} from 'redux';
 const userReducer = (state={}, action) => {
   switch(action.type) {
     case "CHANGE_NAME": {
-      state.name = action.info;
+      state = Object.assign({}, state, {name: action.info});
       break;
     }
     case "CHANGE_AGE": {
-      state.age = action.info;
+      state = Object.assign({}, state, {age: action.info});
     }
   }
   return state;
